@@ -14,11 +14,12 @@ import 'dart:async' as _i2;
 import 'package:pod_client/src/protocol/card.dart' as _i3;
 import 'package:pod_client/src/protocol/invitation_user.dart' as _i4;
 import 'package:pod_client/src/protocol/reward.dart' as _i5;
-import 'package:pod_client/src/protocol/stamp_campaign.dart' as _i6;
-import 'package:pod_client/src/protocol/stamps.dart' as _i7;
-import 'package:pod_client/src/protocol/users.dart' as _i8;
-import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i9;
-import 'protocol.dart' as _i10;
+import 'package:pod_client/src/protocol/settings.dart' as _i6;
+import 'package:pod_client/src/protocol/stamp_campaign.dart' as _i7;
+import 'package:pod_client/src/protocol/stamps.dart' as _i8;
+import 'package:pod_client/src/protocol/users.dart' as _i9;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i10;
+import 'protocol.dart' as _i11;
 
 /// {@category Endpoint}
 class EndpointCard extends _i1.EndpointRef {
@@ -111,16 +112,31 @@ class EndpointReward extends _i1.EndpointRef {
       );
 
   _i2.Future<List<_i5.Reward>> getReward({
-    required int campaignId,
+    required int cardId,
     required int userId,
   }) =>
       caller.callServerEndpoint<List<_i5.Reward>>(
         'reward',
         'getReward',
         {
-          'campaignId': campaignId,
+          'cardId': cardId,
           'userId': userId,
         },
+      );
+}
+
+/// {@category Endpoint}
+class EndpointSetting extends _i1.EndpointRef {
+  EndpointSetting(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'setting';
+
+  _i2.Future<_i6.Settings?> getSetting({required String name}) =>
+      caller.callServerEndpoint<_i6.Settings?>(
+        'setting',
+        'getSetting',
+        {'name': name},
       );
 }
 
@@ -131,12 +147,12 @@ class EndpointStampCampaign extends _i1.EndpointRef {
   @override
   String get name => 'stampCampaign';
 
-  _i2.Future<List<_i6.StampCampaign>> getStampCampaigns({
+  _i2.Future<List<_i7.StampCampaign>> getStampCampaigns({
     double? lat,
     double? lng,
     required int userId,
   }) =>
-      caller.callServerEndpoint<List<_i6.StampCampaign>>(
+      caller.callServerEndpoint<List<_i7.StampCampaign>>(
         'stampCampaign',
         'getStampCampaigns',
         {
@@ -146,12 +162,12 @@ class EndpointStampCampaign extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i6.StampCampaign>> getActiveStampCampaigns({
+  _i2.Future<List<_i7.StampCampaign>> getActiveStampCampaigns({
     double? lat,
     double? lng,
     required int userId,
   }) =>
-      caller.callServerEndpoint<List<_i6.StampCampaign>>(
+      caller.callServerEndpoint<List<_i7.StampCampaign>>(
         'stampCampaign',
         'getActiveStampCampaigns',
         {
@@ -161,12 +177,12 @@ class EndpointStampCampaign extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i6.StampCampaign>> getInactiveStampCampaigns({
+  _i2.Future<List<_i7.StampCampaign>> getInactiveStampCampaigns({
     double? lat,
     double? lng,
     required int userId,
   }) =>
-      caller.callServerEndpoint<List<_i6.StampCampaign>>(
+      caller.callServerEndpoint<List<_i7.StampCampaign>>(
         'stampCampaign',
         'getInactiveStampCampaigns',
         {
@@ -184,11 +200,11 @@ class EndpointStamp extends _i1.EndpointRef {
   @override
   String get name => 'stamp';
 
-  _i2.Future<List<_i7.Stamp>> getMyStamp({
+  _i2.Future<List<_i8.Stamp>> getMyStamp({
     required int userId,
     required int campaignId,
   }) =>
-      caller.callServerEndpoint<List<_i7.Stamp>>(
+      caller.callServerEndpoint<List<_i8.Stamp>>(
         'stamp',
         'getMyStamp',
         {
@@ -197,11 +213,11 @@ class EndpointStamp extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i7.Stamp> stamp({
+  _i2.Future<_i8.Stamp> stamp({
     required int userId,
     required String authCode,
   }) =>
-      caller.callServerEndpoint<_i7.Stamp>(
+      caller.callServerEndpoint<_i8.Stamp>(
         'stamp',
         'stamp',
         {
@@ -210,12 +226,12 @@ class EndpointStamp extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i7.Stamp>> redeem({
+  _i2.Future<List<_i8.Stamp>> redeem({
     required int userId,
     required String authCode,
     required int rewardId,
   }) =>
-      caller.callServerEndpoint<List<_i7.Stamp>>(
+      caller.callServerEndpoint<List<_i8.Stamp>>(
         'stamp',
         'redeem',
         {
@@ -233,31 +249,64 @@ class EndpointUser extends _i1.EndpointRef {
   @override
   String get name => 'user';
 
-  _i2.Future<_i8.User?> getUser({required int userId}) =>
-      caller.callServerEndpoint<_i8.User?>(
+  _i2.Future<_i9.User?> getUser({required int userId}) =>
+      caller.callServerEndpoint<_i9.User?>(
         'user',
         'getUser',
         {'userId': userId},
       );
 
-  _i2.Future<_i8.User?> createUser({
+  _i2.Future<List<_i9.User>> getListUsers() =>
+      caller.callServerEndpoint<List<_i9.User>>(
+        'user',
+        'getListUsers',
+        {},
+      );
+
+  _i2.Future<_i9.User?> updateUserFaceId({
+    required String username,
+    required String faceId,
+  }) =>
+      caller.callServerEndpoint<_i9.User?>(
+        'user',
+        'updateUserFaceId',
+        {
+          'username': username,
+          'faceId': faceId,
+        },
+      );
+
+  _i2.Future<_i9.User?> getUserByFaceId({required String faceId}) =>
+      caller.callServerEndpoint<_i9.User?>(
+        'user',
+        'getUserByFaceId',
+        {'faceId': faceId},
+      );
+
+  _i2.Future<_i9.User?> createUser({
     required String username,
     required String password,
+    String? fullName,
+    DateTime? birthDate,
+    String? occupation,
   }) =>
-      caller.callServerEndpoint<_i8.User?>(
+      caller.callServerEndpoint<_i9.User?>(
         'user',
         'createUser',
         {
           'username': username,
           'password': password,
+          'fullName': fullName,
+          'birthDate': birthDate,
+          'occupation': occupation,
         },
       );
 
-  _i2.Future<_i8.User?> loginUser({
+  _i2.Future<_i9.User?> loginUser({
     required String username,
     required String password,
   }) =>
-      caller.callServerEndpoint<_i8.User?>(
+      caller.callServerEndpoint<_i9.User?>(
         'user',
         'loginUser',
         {
@@ -272,14 +321,35 @@ class EndpointUser extends _i1.EndpointRef {
         'deleteUser',
         {'userId': userId},
       );
+
+  _i2.Future<_i9.User?> updateUser({
+    required int userId,
+    required String username,
+    required String password,
+    required String fullName,
+    required DateTime birthDate,
+    required String occupation,
+  }) =>
+      caller.callServerEndpoint<_i9.User?>(
+        'user',
+        'updateUser',
+        {
+          'userId': userId,
+          'username': username,
+          'password': password,
+          'fullName': fullName,
+          'birthDate': birthDate,
+          'occupation': occupation,
+        },
+      );
 }
 
 class _Modules {
   _Modules(Client client) {
-    auth = _i9.Caller(client);
+    auth = _i10.Caller(client);
   }
 
-  late final _i9.Caller auth;
+  late final _i10.Caller auth;
 }
 
 class Client extends _i1.ServerpodClientShared {
@@ -298,7 +368,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
-          _i10.Protocol(),
+          _i11.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -312,6 +382,7 @@ class Client extends _i1.ServerpodClientShared {
     invitation = EndpointInvitation(this);
     merchant = EndpointMerchant(this);
     reward = EndpointReward(this);
+    setting = EndpointSetting(this);
     stampCampaign = EndpointStampCampaign(this);
     stamp = EndpointStamp(this);
     user = EndpointUser(this);
@@ -325,6 +396,8 @@ class Client extends _i1.ServerpodClientShared {
   late final EndpointMerchant merchant;
 
   late final EndpointReward reward;
+
+  late final EndpointSetting setting;
 
   late final EndpointStampCampaign stampCampaign;
 
@@ -340,6 +413,7 @@ class Client extends _i1.ServerpodClientShared {
         'invitation': invitation,
         'merchant': merchant,
         'reward': reward,
+        'setting': setting,
         'stampCampaign': stampCampaign,
         'stamp': stamp,
         'user': user,

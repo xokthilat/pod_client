@@ -21,8 +21,12 @@ abstract class RedeemTrx implements _i1.SerializableModel {
     this.campaign,
     required this.rewardId,
     this.reward,
+    required this.cardId,
+    this.card,
     DateTime? createdAt,
-  }) : createdAt = createdAt ?? DateTime.now();
+    DateTime? updatedAt,
+  })  : createdAt = createdAt ?? DateTime.now(),
+        updatedAt = updatedAt ?? DateTime.now();
 
   factory RedeemTrx({
     int? id,
@@ -32,7 +36,10 @@ abstract class RedeemTrx implements _i1.SerializableModel {
     _i2.StampCampaign? campaign,
     required int rewardId,
     _i2.Reward? reward,
+    required int cardId,
+    _i2.Card? card,
     DateTime? createdAt,
+    DateTime? updatedAt,
   }) = _RedeemTrxImpl;
 
   factory RedeemTrx.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -53,8 +60,15 @@ abstract class RedeemTrx implements _i1.SerializableModel {
           ? null
           : _i2.Reward.fromJson(
               (jsonSerialization['reward'] as Map<String, dynamic>)),
+      cardId: jsonSerialization['cardId'] as int,
+      card: jsonSerialization['card'] == null
+          ? null
+          : _i2.Card.fromJson(
+              (jsonSerialization['card'] as Map<String, dynamic>)),
       createdAt:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
+      updatedAt:
+          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['updatedAt']),
     );
   }
 
@@ -75,7 +89,13 @@ abstract class RedeemTrx implements _i1.SerializableModel {
 
   _i2.Reward? reward;
 
+  int cardId;
+
+  _i2.Card? card;
+
   DateTime createdAt;
+
+  DateTime updatedAt;
 
   RedeemTrx copyWith({
     int? id,
@@ -85,7 +105,10 @@ abstract class RedeemTrx implements _i1.SerializableModel {
     _i2.StampCampaign? campaign,
     int? rewardId,
     _i2.Reward? reward,
+    int? cardId,
+    _i2.Card? card,
     DateTime? createdAt,
+    DateTime? updatedAt,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -97,7 +120,10 @@ abstract class RedeemTrx implements _i1.SerializableModel {
       if (campaign != null) 'campaign': campaign?.toJson(),
       'rewardId': rewardId,
       if (reward != null) 'reward': reward?.toJson(),
+      'cardId': cardId,
+      if (card != null) 'card': card?.toJson(),
       'createdAt': createdAt.toJson(),
+      'updatedAt': updatedAt.toJson(),
     };
   }
 
@@ -118,7 +144,10 @@ class _RedeemTrxImpl extends RedeemTrx {
     _i2.StampCampaign? campaign,
     required int rewardId,
     _i2.Reward? reward,
+    required int cardId,
+    _i2.Card? card,
     DateTime? createdAt,
+    DateTime? updatedAt,
   }) : super._(
           id: id,
           userId: userId,
@@ -127,7 +156,10 @@ class _RedeemTrxImpl extends RedeemTrx {
           campaign: campaign,
           rewardId: rewardId,
           reward: reward,
+          cardId: cardId,
+          card: card,
           createdAt: createdAt,
+          updatedAt: updatedAt,
         );
 
   @override
@@ -139,7 +171,10 @@ class _RedeemTrxImpl extends RedeemTrx {
     Object? campaign = _Undefined,
     int? rewardId,
     Object? reward = _Undefined,
+    int? cardId,
+    Object? card = _Undefined,
     DateTime? createdAt,
+    DateTime? updatedAt,
   }) {
     return RedeemTrx(
       id: id is int? ? id : this.id,
@@ -150,7 +185,10 @@ class _RedeemTrxImpl extends RedeemTrx {
           campaign is _i2.StampCampaign? ? campaign : this.campaign?.copyWith(),
       rewardId: rewardId ?? this.rewardId,
       reward: reward is _i2.Reward? ? reward : this.reward?.copyWith(),
+      cardId: cardId ?? this.cardId,
+      card: card is _i2.Card? ? card : this.card?.copyWith(),
       createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 }

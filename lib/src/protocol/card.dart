@@ -20,10 +20,15 @@ abstract class Card implements _i1.SerializableModel {
     required this.userId,
     this.user,
     int? cardNumber,
-    int? totalStamps,
+    required this.totalStamps,
+    bool? isCompleted,
     this.stamps,
+    DateTime? createdAt,
+    DateTime? updatedAt,
   })  : cardNumber = cardNumber ?? 1,
-        totalStamps = totalStamps ?? 0;
+        isCompleted = isCompleted ?? false,
+        createdAt = createdAt ?? DateTime.now(),
+        updatedAt = updatedAt ?? DateTime.now();
 
   factory Card({
     int? id,
@@ -32,8 +37,11 @@ abstract class Card implements _i1.SerializableModel {
     required int userId,
     _i2.User? user,
     int? cardNumber,
-    int? totalStamps,
+    required int totalStamps,
+    bool? isCompleted,
     List<_i2.Stamp>? stamps,
+    DateTime? createdAt,
+    DateTime? updatedAt,
   }) = _CardImpl;
 
   factory Card.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -51,9 +59,14 @@ abstract class Card implements _i1.SerializableModel {
               (jsonSerialization['user'] as Map<String, dynamic>)),
       cardNumber: jsonSerialization['cardNumber'] as int,
       totalStamps: jsonSerialization['totalStamps'] as int,
+      isCompleted: jsonSerialization['isCompleted'] as bool,
       stamps: (jsonSerialization['stamps'] as List?)
           ?.map((e) => _i2.Stamp.fromJson((e as Map<String, dynamic>)))
           .toList(),
+      createdAt:
+          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
+      updatedAt:
+          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['updatedAt']),
     );
   }
 
@@ -74,7 +87,13 @@ abstract class Card implements _i1.SerializableModel {
 
   int totalStamps;
 
+  bool isCompleted;
+
   List<_i2.Stamp>? stamps;
+
+  DateTime createdAt;
+
+  DateTime updatedAt;
 
   Card copyWith({
     int? id,
@@ -84,7 +103,10 @@ abstract class Card implements _i1.SerializableModel {
     _i2.User? user,
     int? cardNumber,
     int? totalStamps,
+    bool? isCompleted,
     List<_i2.Stamp>? stamps,
+    DateTime? createdAt,
+    DateTime? updatedAt,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -96,8 +118,11 @@ abstract class Card implements _i1.SerializableModel {
       if (user != null) 'user': user?.toJson(),
       'cardNumber': cardNumber,
       'totalStamps': totalStamps,
+      'isCompleted': isCompleted,
       if (stamps != null)
         'stamps': stamps?.toJson(valueToJson: (v) => v.toJson()),
+      'createdAt': createdAt.toJson(),
+      'updatedAt': updatedAt.toJson(),
     };
   }
 
@@ -117,8 +142,11 @@ class _CardImpl extends Card {
     required int userId,
     _i2.User? user,
     int? cardNumber,
-    int? totalStamps,
+    required int totalStamps,
+    bool? isCompleted,
     List<_i2.Stamp>? stamps,
+    DateTime? createdAt,
+    DateTime? updatedAt,
   }) : super._(
           id: id,
           stampCampaignId: stampCampaignId,
@@ -127,7 +155,10 @@ class _CardImpl extends Card {
           user: user,
           cardNumber: cardNumber,
           totalStamps: totalStamps,
+          isCompleted: isCompleted,
           stamps: stamps,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
         );
 
   @override
@@ -139,7 +170,10 @@ class _CardImpl extends Card {
     Object? user = _Undefined,
     int? cardNumber,
     int? totalStamps,
+    bool? isCompleted,
     Object? stamps = _Undefined,
+    DateTime? createdAt,
+    DateTime? updatedAt,
   }) {
     return Card(
       id: id is int? ? id : this.id,
@@ -151,9 +185,12 @@ class _CardImpl extends Card {
       user: user is _i2.User? ? user : this.user?.copyWith(),
       cardNumber: cardNumber ?? this.cardNumber,
       totalStamps: totalStamps ?? this.totalStamps,
+      isCompleted: isCompleted ?? this.isCompleted,
       stamps: stamps is List<_i2.Stamp>?
           ? stamps
           : this.stamps?.map((e0) => e0.copyWith()).toList(),
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 }

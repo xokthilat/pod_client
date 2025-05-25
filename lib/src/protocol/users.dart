@@ -20,6 +20,7 @@ abstract class User implements _i1.SerializableModel {
     this.fullName,
     this.birthDate,
     this.occupation,
+    this.faceId,
     DateTime? updatedAt,
   }) : updatedAt = updatedAt ?? DateTime.now();
 
@@ -31,6 +32,7 @@ abstract class User implements _i1.SerializableModel {
     String? fullName,
     DateTime? birthDate,
     String? occupation,
+    String? faceId,
     DateTime? updatedAt,
   }) = _UserImpl;
 
@@ -46,6 +48,7 @@ abstract class User implements _i1.SerializableModel {
           ? null
           : _i1.DateTimeJsonExtension.fromJson(jsonSerialization['birthDate']),
       occupation: jsonSerialization['occupation'] as String?,
+      faceId: jsonSerialization['faceId'] as String?,
       updatedAt:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['updatedAt']),
     );
@@ -68,6 +71,8 @@ abstract class User implements _i1.SerializableModel {
 
   String? occupation;
 
+  String? faceId;
+
   DateTime updatedAt;
 
   User copyWith({
@@ -78,6 +83,7 @@ abstract class User implements _i1.SerializableModel {
     String? fullName,
     DateTime? birthDate,
     String? occupation,
+    String? faceId,
     DateTime? updatedAt,
   });
   @override
@@ -90,6 +96,7 @@ abstract class User implements _i1.SerializableModel {
       if (fullName != null) 'fullName': fullName,
       if (birthDate != null) 'birthDate': birthDate?.toJson(),
       if (occupation != null) 'occupation': occupation,
+      if (faceId != null) 'faceId': faceId,
       'updatedAt': updatedAt.toJson(),
     };
   }
@@ -111,6 +118,7 @@ class _UserImpl extends User {
     String? fullName,
     DateTime? birthDate,
     String? occupation,
+    String? faceId,
     DateTime? updatedAt,
   }) : super._(
           id: id,
@@ -120,6 +128,7 @@ class _UserImpl extends User {
           fullName: fullName,
           birthDate: birthDate,
           occupation: occupation,
+          faceId: faceId,
           updatedAt: updatedAt,
         );
 
@@ -132,6 +141,7 @@ class _UserImpl extends User {
     Object? fullName = _Undefined,
     Object? birthDate = _Undefined,
     Object? occupation = _Undefined,
+    Object? faceId = _Undefined,
     DateTime? updatedAt,
   }) {
     return User(
@@ -142,6 +152,7 @@ class _UserImpl extends User {
       fullName: fullName is String? ? fullName : this.fullName,
       birthDate: birthDate is DateTime? ? birthDate : this.birthDate,
       occupation: occupation is String? ? occupation : this.occupation,
+      faceId: faceId is String? ? faceId : this.faceId,
       updatedAt: updatedAt ?? this.updatedAt,
     );
   }

@@ -17,21 +17,24 @@ import 'invitation_user.dart' as _i4;
 import 'merchants.dart' as _i5;
 import 'redeem_trx.dart' as _i6;
 import 'reward.dart' as _i7;
-import 'stamp_campaign.dart' as _i8;
-import 'stamps.dart' as _i9;
-import 'users.dart' as _i10;
-import 'protocol.dart' as _i11;
-import 'package:pod_client/src/protocol/card.dart' as _i12;
-import 'package:pod_client/src/protocol/reward.dart' as _i13;
-import 'package:pod_client/src/protocol/stamp_campaign.dart' as _i14;
-import 'package:pod_client/src/protocol/stamps.dart' as _i15;
-import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i16;
+import 'settings.dart' as _i8;
+import 'stamp_campaign.dart' as _i9;
+import 'stamps.dart' as _i10;
+import 'users.dart' as _i11;
+import 'protocol.dart' as _i12;
+import 'package:pod_client/src/protocol/card.dart' as _i13;
+import 'package:pod_client/src/protocol/reward.dart' as _i14;
+import 'package:pod_client/src/protocol/stamp_campaign.dart' as _i15;
+import 'package:pod_client/src/protocol/stamps.dart' as _i16;
+import 'package:pod_client/src/protocol/users.dart' as _i17;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i18;
 export 'app_error_exception.dart';
 export 'card.dart';
 export 'invitation_user.dart';
 export 'merchants.dart';
 export 'redeem_trx.dart';
 export 'reward.dart';
+export 'settings.dart';
 export 'stamp_campaign.dart';
 export 'stamps.dart';
 export 'users.dart';
@@ -68,14 +71,17 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i7.Reward) {
       return _i7.Reward.fromJson(data) as T;
     }
-    if (t == _i8.StampCampaign) {
-      return _i8.StampCampaign.fromJson(data) as T;
+    if (t == _i8.Settings) {
+      return _i8.Settings.fromJson(data) as T;
     }
-    if (t == _i9.Stamp) {
-      return _i9.Stamp.fromJson(data) as T;
+    if (t == _i9.StampCampaign) {
+      return _i9.StampCampaign.fromJson(data) as T;
     }
-    if (t == _i10.User) {
-      return _i10.User.fromJson(data) as T;
+    if (t == _i10.Stamp) {
+      return _i10.Stamp.fromJson(data) as T;
+    }
+    if (t == _i11.User) {
+      return _i11.User.fromJson(data) as T;
     }
     if (t == _i1.getType<_i2.AppErrorException?>()) {
       return (data != null ? _i2.AppErrorException.fromJson(data) : null) as T;
@@ -95,49 +101,56 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i1.getType<_i7.Reward?>()) {
       return (data != null ? _i7.Reward.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i8.StampCampaign?>()) {
-      return (data != null ? _i8.StampCampaign.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i8.Settings?>()) {
+      return (data != null ? _i8.Settings.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i9.Stamp?>()) {
-      return (data != null ? _i9.Stamp.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i9.StampCampaign?>()) {
+      return (data != null ? _i9.StampCampaign.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i10.User?>()) {
-      return (data != null ? _i10.User.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i10.Stamp?>()) {
+      return (data != null ? _i10.Stamp.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<List<_i11.Stamp>?>()) {
+    if (t == _i1.getType<_i11.User?>()) {
+      return (data != null ? _i11.User.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<List<_i12.Stamp>?>()) {
       return (data != null
-          ? (data as List).map((e) => deserialize<_i11.Stamp>(e)).toList()
+          ? (data as List).map((e) => deserialize<_i12.Stamp>(e)).toList()
           : null) as dynamic;
     }
-    if (t == _i1.getType<List<_i11.Reward>?>()) {
+    if (t == _i1.getType<List<_i12.Reward>?>()) {
       return (data != null
-          ? (data as List).map((e) => deserialize<_i11.Reward>(e)).toList()
+          ? (data as List).map((e) => deserialize<_i12.Reward>(e)).toList()
           : null) as dynamic;
     }
-    if (t == _i1.getType<List<_i11.Stamp>?>()) {
+    if (t == _i1.getType<List<_i12.Stamp>?>()) {
       return (data != null
-          ? (data as List).map((e) => deserialize<_i11.Stamp>(e)).toList()
+          ? (data as List).map((e) => deserialize<_i12.Stamp>(e)).toList()
           : null) as dynamic;
     }
-    if (t == List<_i12.Card>) {
-      return (data as List).map((e) => deserialize<_i12.Card>(e)).toList()
+    if (t == List<_i13.Card>) {
+      return (data as List).map((e) => deserialize<_i13.Card>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i13.Reward>) {
-      return (data as List).map((e) => deserialize<_i13.Reward>(e)).toList()
+    if (t == List<_i14.Reward>) {
+      return (data as List).map((e) => deserialize<_i14.Reward>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i14.StampCampaign>) {
+    if (t == List<_i15.StampCampaign>) {
       return (data as List)
-          .map((e) => deserialize<_i14.StampCampaign>(e))
+          .map((e) => deserialize<_i15.StampCampaign>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i15.Stamp>) {
-      return (data as List).map((e) => deserialize<_i15.Stamp>(e)).toList()
+    if (t == List<_i16.Stamp>) {
+      return (data as List).map((e) => deserialize<_i16.Stamp>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i17.User>) {
+      return (data as List).map((e) => deserialize<_i17.User>(e)).toList()
           as dynamic;
     }
     try {
-      return _i16.Protocol().deserialize<T>(data, t);
+      return _i18.Protocol().deserialize<T>(data, t);
     } on _i1.DeserializationTypeNotFoundException catch (_) {}
     return super.deserialize<T>(data, t);
   }
@@ -164,16 +177,19 @@ class Protocol extends _i1.SerializationManager {
     if (data is _i7.Reward) {
       return 'Reward';
     }
-    if (data is _i8.StampCampaign) {
+    if (data is _i8.Settings) {
+      return 'Settings';
+    }
+    if (data is _i9.StampCampaign) {
       return 'StampCampaign';
     }
-    if (data is _i9.Stamp) {
+    if (data is _i10.Stamp) {
       return 'Stamp';
     }
-    if (data is _i10.User) {
+    if (data is _i11.User) {
       return 'User';
     }
-    className = _i16.Protocol().getClassNameForObject(data);
+    className = _i18.Protocol().getClassNameForObject(data);
     if (className != null) {
       return 'serverpod_auth.$className';
     }
@@ -200,18 +216,21 @@ class Protocol extends _i1.SerializationManager {
     if (data['className'] == 'Reward') {
       return deserialize<_i7.Reward>(data['data']);
     }
+    if (data['className'] == 'Settings') {
+      return deserialize<_i8.Settings>(data['data']);
+    }
     if (data['className'] == 'StampCampaign') {
-      return deserialize<_i8.StampCampaign>(data['data']);
+      return deserialize<_i9.StampCampaign>(data['data']);
     }
     if (data['className'] == 'Stamp') {
-      return deserialize<_i9.Stamp>(data['data']);
+      return deserialize<_i10.Stamp>(data['data']);
     }
     if (data['className'] == 'User') {
-      return deserialize<_i10.User>(data['data']);
+      return deserialize<_i11.User>(data['data']);
     }
     if (data['className'].startsWith('serverpod_auth.')) {
       data['className'] = data['className'].substring(15);
-      return _i16.Protocol().deserializeByClassName(data);
+      return _i18.Protocol().deserializeByClassName(data);
     }
     return super.deserializeByClassName(data);
   }

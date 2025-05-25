@@ -20,8 +20,11 @@ abstract class Stamp implements _i1.SerializableModel {
     required this.stampCampaignId,
     this.stampCampaign,
     this.stampImageUrl,
+    this.stampAuthCode,
     bool? isRedeemed,
     DateTime? collectedAt,
+    required this.cardId,
+    this.card,
   })  : isRedeemed = isRedeemed ?? false,
         collectedAt = collectedAt ?? DateTime.now();
 
@@ -32,8 +35,11 @@ abstract class Stamp implements _i1.SerializableModel {
     required int stampCampaignId,
     _i2.StampCampaign? stampCampaign,
     String? stampImageUrl,
+    String? stampAuthCode,
     bool? isRedeemed,
     DateTime? collectedAt,
+    required int cardId,
+    _i2.Card? card,
   }) = _StampImpl;
 
   factory Stamp.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -50,9 +56,15 @@ abstract class Stamp implements _i1.SerializableModel {
           : _i2.StampCampaign.fromJson(
               (jsonSerialization['stampCampaign'] as Map<String, dynamic>)),
       stampImageUrl: jsonSerialization['stampImageUrl'] as String?,
+      stampAuthCode: jsonSerialization['stampAuthCode'] as String?,
       isRedeemed: jsonSerialization['isRedeemed'] as bool,
       collectedAt:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['collectedAt']),
+      cardId: jsonSerialization['cardId'] as int,
+      card: jsonSerialization['card'] == null
+          ? null
+          : _i2.Card.fromJson(
+              (jsonSerialization['card'] as Map<String, dynamic>)),
     );
   }
 
@@ -71,9 +83,15 @@ abstract class Stamp implements _i1.SerializableModel {
 
   String? stampImageUrl;
 
+  String? stampAuthCode;
+
   bool isRedeemed;
 
   DateTime collectedAt;
+
+  int cardId;
+
+  _i2.Card? card;
 
   Stamp copyWith({
     int? id,
@@ -82,8 +100,11 @@ abstract class Stamp implements _i1.SerializableModel {
     int? stampCampaignId,
     _i2.StampCampaign? stampCampaign,
     String? stampImageUrl,
+    String? stampAuthCode,
     bool? isRedeemed,
     DateTime? collectedAt,
+    int? cardId,
+    _i2.Card? card,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -94,8 +115,11 @@ abstract class Stamp implements _i1.SerializableModel {
       'stampCampaignId': stampCampaignId,
       if (stampCampaign != null) 'stampCampaign': stampCampaign?.toJson(),
       if (stampImageUrl != null) 'stampImageUrl': stampImageUrl,
+      if (stampAuthCode != null) 'stampAuthCode': stampAuthCode,
       'isRedeemed': isRedeemed,
       'collectedAt': collectedAt.toJson(),
+      'cardId': cardId,
+      if (card != null) 'card': card?.toJson(),
     };
   }
 
@@ -115,8 +139,11 @@ class _StampImpl extends Stamp {
     required int stampCampaignId,
     _i2.StampCampaign? stampCampaign,
     String? stampImageUrl,
+    String? stampAuthCode,
     bool? isRedeemed,
     DateTime? collectedAt,
+    required int cardId,
+    _i2.Card? card,
   }) : super._(
           id: id,
           userId: userId,
@@ -124,8 +151,11 @@ class _StampImpl extends Stamp {
           stampCampaignId: stampCampaignId,
           stampCampaign: stampCampaign,
           stampImageUrl: stampImageUrl,
+          stampAuthCode: stampAuthCode,
           isRedeemed: isRedeemed,
           collectedAt: collectedAt,
+          cardId: cardId,
+          card: card,
         );
 
   @override
@@ -136,8 +166,11 @@ class _StampImpl extends Stamp {
     int? stampCampaignId,
     Object? stampCampaign = _Undefined,
     Object? stampImageUrl = _Undefined,
+    Object? stampAuthCode = _Undefined,
     bool? isRedeemed,
     DateTime? collectedAt,
+    int? cardId,
+    Object? card = _Undefined,
   }) {
     return Stamp(
       id: id is int? ? id : this.id,
@@ -149,8 +182,12 @@ class _StampImpl extends Stamp {
           : this.stampCampaign?.copyWith(),
       stampImageUrl:
           stampImageUrl is String? ? stampImageUrl : this.stampImageUrl,
+      stampAuthCode:
+          stampAuthCode is String? ? stampAuthCode : this.stampAuthCode,
       isRedeemed: isRedeemed ?? this.isRedeemed,
       collectedAt: collectedAt ?? this.collectedAt,
+      cardId: cardId ?? this.cardId,
+      card: card is _i2.Card? ? card : this.card?.copyWith(),
     );
   }
 }
