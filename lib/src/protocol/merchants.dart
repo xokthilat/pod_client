@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
+import 'protocol.dart' as _i2;
 
 abstract class Merchant implements _i1.SerializableModel {
   Merchant._({
@@ -26,6 +27,8 @@ abstract class Merchant implements _i1.SerializableModel {
     this.instagram,
     this.twitter,
     this.mapUrl,
+    required this.userRankId,
+    this.userRank,
     DateTime? createdAt,
     DateTime? updatedAt,
   })  : createdAt = createdAt ?? DateTime.now(),
@@ -45,6 +48,8 @@ abstract class Merchant implements _i1.SerializableModel {
     String? instagram,
     String? twitter,
     String? mapUrl,
+    required int userRankId,
+    _i2.UserMerchantRank? userRank,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) = _MerchantImpl;
@@ -64,6 +69,11 @@ abstract class Merchant implements _i1.SerializableModel {
       instagram: jsonSerialization['instagram'] as String?,
       twitter: jsonSerialization['twitter'] as String?,
       mapUrl: jsonSerialization['mapUrl'] as String?,
+      userRankId: jsonSerialization['userRankId'] as int,
+      userRank: jsonSerialization['userRank'] == null
+          ? null
+          : _i2.UserMerchantRank.fromJson(
+              (jsonSerialization['userRank'] as Map<String, dynamic>)),
       createdAt:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
       updatedAt:
@@ -100,6 +110,10 @@ abstract class Merchant implements _i1.SerializableModel {
 
   String? mapUrl;
 
+  int userRankId;
+
+  _i2.UserMerchantRank? userRank;
+
   DateTime createdAt;
 
   DateTime updatedAt;
@@ -118,6 +132,8 @@ abstract class Merchant implements _i1.SerializableModel {
     String? instagram,
     String? twitter,
     String? mapUrl,
+    int? userRankId,
+    _i2.UserMerchantRank? userRank,
     DateTime? createdAt,
     DateTime? updatedAt,
   });
@@ -137,6 +153,8 @@ abstract class Merchant implements _i1.SerializableModel {
       if (instagram != null) 'instagram': instagram,
       if (twitter != null) 'twitter': twitter,
       if (mapUrl != null) 'mapUrl': mapUrl,
+      'userRankId': userRankId,
+      if (userRank != null) 'userRank': userRank?.toJson(),
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
     };
@@ -165,6 +183,8 @@ class _MerchantImpl extends Merchant {
     String? instagram,
     String? twitter,
     String? mapUrl,
+    required int userRankId,
+    _i2.UserMerchantRank? userRank,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) : super._(
@@ -181,6 +201,8 @@ class _MerchantImpl extends Merchant {
           instagram: instagram,
           twitter: twitter,
           mapUrl: mapUrl,
+          userRankId: userRankId,
+          userRank: userRank,
           createdAt: createdAt,
           updatedAt: updatedAt,
         );
@@ -200,6 +222,8 @@ class _MerchantImpl extends Merchant {
     Object? instagram = _Undefined,
     Object? twitter = _Undefined,
     Object? mapUrl = _Undefined,
+    int? userRankId,
+    Object? userRank = _Undefined,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
@@ -217,6 +241,10 @@ class _MerchantImpl extends Merchant {
       instagram: instagram is String? ? instagram : this.instagram,
       twitter: twitter is String? ? twitter : this.twitter,
       mapUrl: mapUrl is String? ? mapUrl : this.mapUrl,
+      userRankId: userRankId ?? this.userRankId,
+      userRank: userRank is _i2.UserMerchantRank?
+          ? userRank
+          : this.userRank?.copyWith(),
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );
