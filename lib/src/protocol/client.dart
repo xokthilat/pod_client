@@ -111,6 +111,13 @@ class EndpointReward extends _i1.EndpointRef {
         },
       );
 
+  _i2.Future<List<_i5.Reward>> getRewardByCampaign({required int campaignId}) =>
+      caller.callServerEndpoint<List<_i5.Reward>>(
+        'reward',
+        'getRewardByCampaign',
+        {'campaignId': campaignId},
+      );
+
   _i2.Future<List<_i5.Reward>> getReward({
     required int cardId,
     required int userId,
@@ -210,6 +217,47 @@ class EndpointStamp extends _i1.EndpointRef {
         {
           'userId': userId,
           'campaignId': campaignId,
+        },
+      );
+
+  _i2.Future<List<_i8.Stamp>> getMyUnredeemStamp({
+    required int userId,
+    required int campaignId,
+  }) =>
+      caller.callServerEndpoint<List<_i8.Stamp>>(
+        'stamp',
+        'getMyUnredeemStamp',
+        {
+          'userId': userId,
+          'campaignId': campaignId,
+        },
+      );
+
+  _i2.Future<List<_i8.Stamp>> getMyRedeemedStamp({
+    required int userId,
+    required int campaignId,
+  }) =>
+      caller.callServerEndpoint<List<_i8.Stamp>>(
+        'stamp',
+        'getMyRedeemedStamp',
+        {
+          'userId': userId,
+          'campaignId': campaignId,
+        },
+      );
+
+  _i2.Future<bool> redeemV2({
+    required int userId,
+    required int rewardId,
+    required int cardId,
+  }) =>
+      caller.callServerEndpoint<bool>(
+        'stamp',
+        'redeemV2',
+        {
+          'userId': userId,
+          'rewardId': rewardId,
+          'cardId': cardId,
         },
       );
 
