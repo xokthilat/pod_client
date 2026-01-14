@@ -249,7 +249,7 @@ class EndpointStamp extends _i1.EndpointRef {
   _i2.Future<bool> redeemV2({
     required int userId,
     required int rewardId,
-    required int cardId,
+    required String authCode,
   }) =>
       caller.callServerEndpoint<bool>(
         'stamp',
@@ -257,7 +257,7 @@ class EndpointStamp extends _i1.EndpointRef {
         {
           'userId': userId,
           'rewardId': rewardId,
-          'cardId': cardId,
+          'authCode': authCode,
         },
       );
 
