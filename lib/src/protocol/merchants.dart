@@ -27,6 +27,7 @@ abstract class Merchant implements _i1.SerializableModel {
     this.instagram,
     this.twitter,
     this.mapUrl,
+    this.ranks,
     this.userRank,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -47,6 +48,7 @@ abstract class Merchant implements _i1.SerializableModel {
     String? instagram,
     String? twitter,
     String? mapUrl,
+    List<_i2.Rank>? ranks,
     _i2.UserMerchantRank? userRank,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -67,6 +69,9 @@ abstract class Merchant implements _i1.SerializableModel {
       instagram: jsonSerialization['instagram'] as String?,
       twitter: jsonSerialization['twitter'] as String?,
       mapUrl: jsonSerialization['mapUrl'] as String?,
+      ranks: (jsonSerialization['ranks'] as List?)
+          ?.map((e) => _i2.Rank.fromJson((e as Map<String, dynamic>)))
+          .toList(),
       userRank: jsonSerialization['userRank'] == null
           ? null
           : _i2.UserMerchantRank.fromJson(
@@ -107,6 +112,8 @@ abstract class Merchant implements _i1.SerializableModel {
 
   String? mapUrl;
 
+  List<_i2.Rank>? ranks;
+
   _i2.UserMerchantRank? userRank;
 
   DateTime createdAt;
@@ -127,6 +134,7 @@ abstract class Merchant implements _i1.SerializableModel {
     String? instagram,
     String? twitter,
     String? mapUrl,
+    List<_i2.Rank>? ranks,
     _i2.UserMerchantRank? userRank,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -147,6 +155,7 @@ abstract class Merchant implements _i1.SerializableModel {
       if (instagram != null) 'instagram': instagram,
       if (twitter != null) 'twitter': twitter,
       if (mapUrl != null) 'mapUrl': mapUrl,
+      if (ranks != null) 'ranks': ranks?.toJson(valueToJson: (v) => v.toJson()),
       if (userRank != null) 'userRank': userRank?.toJson(),
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
@@ -176,6 +185,7 @@ class _MerchantImpl extends Merchant {
     String? instagram,
     String? twitter,
     String? mapUrl,
+    List<_i2.Rank>? ranks,
     _i2.UserMerchantRank? userRank,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -193,6 +203,7 @@ class _MerchantImpl extends Merchant {
           instagram: instagram,
           twitter: twitter,
           mapUrl: mapUrl,
+          ranks: ranks,
           userRank: userRank,
           createdAt: createdAt,
           updatedAt: updatedAt,
@@ -213,6 +224,7 @@ class _MerchantImpl extends Merchant {
     Object? instagram = _Undefined,
     Object? twitter = _Undefined,
     Object? mapUrl = _Undefined,
+    Object? ranks = _Undefined,
     Object? userRank = _Undefined,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -231,6 +243,9 @@ class _MerchantImpl extends Merchant {
       instagram: instagram is String? ? instagram : this.instagram,
       twitter: twitter is String? ? twitter : this.twitter,
       mapUrl: mapUrl is String? ? mapUrl : this.mapUrl,
+      ranks: ranks is List<_i2.Rank>?
+          ? ranks
+          : this.ranks?.map((e0) => e0.copyWith()).toList(),
       userRank: userRank is _i2.UserMerchantRank?
           ? userRank
           : this.userRank?.copyWith(),

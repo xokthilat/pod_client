@@ -12,50 +12,44 @@
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'protocol.dart' as _i2;
 
-abstract class UserMerchantRank implements _i1.SerializableModel {
-  UserMerchantRank._({
+abstract class Rank implements _i1.SerializableModel {
+  Rank._({
     this.id,
-    required this.userId,
-    this.user,
     required this.merchantId,
     this.merchant,
-    required this.rankId,
-    this.rank,
+    required this.rank,
+    required this.points,
+    this.verticalCardImage,
+    this.horizontalCardImage,
     DateTime? createdAt,
     DateTime? updatedAt,
   })  : createdAt = createdAt ?? DateTime.now(),
         updatedAt = updatedAt ?? DateTime.now();
 
-  factory UserMerchantRank({
+  factory Rank({
     int? id,
-    required int userId,
-    _i2.User? user,
     required int merchantId,
     _i2.Merchant? merchant,
-    required int rankId,
-    _i2.Rank? rank,
+    required String rank,
+    required int points,
+    String? verticalCardImage,
+    String? horizontalCardImage,
     DateTime? createdAt,
     DateTime? updatedAt,
-  }) = _UserMerchantRankImpl;
+  }) = _RankImpl;
 
-  factory UserMerchantRank.fromJson(Map<String, dynamic> jsonSerialization) {
-    return UserMerchantRank(
+  factory Rank.fromJson(Map<String, dynamic> jsonSerialization) {
+    return Rank(
       id: jsonSerialization['id'] as int?,
-      userId: jsonSerialization['userId'] as int,
-      user: jsonSerialization['user'] == null
-          ? null
-          : _i2.User.fromJson(
-              (jsonSerialization['user'] as Map<String, dynamic>)),
       merchantId: jsonSerialization['merchantId'] as int,
       merchant: jsonSerialization['merchant'] == null
           ? null
           : _i2.Merchant.fromJson(
               (jsonSerialization['merchant'] as Map<String, dynamic>)),
-      rankId: jsonSerialization['rankId'] as int,
-      rank: jsonSerialization['rank'] == null
-          ? null
-          : _i2.Rank.fromJson(
-              (jsonSerialization['rank'] as Map<String, dynamic>)),
+      rank: jsonSerialization['rank'] as String,
+      points: jsonSerialization['points'] as int,
+      verticalCardImage: jsonSerialization['verticalCardImage'] as String?,
+      horizontalCardImage: jsonSerialization['horizontalCardImage'] as String?,
       createdAt:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
       updatedAt:
@@ -68,30 +62,30 @@ abstract class UserMerchantRank implements _i1.SerializableModel {
   /// the id will be null.
   int? id;
 
-  int userId;
-
-  _i2.User? user;
-
   int merchantId;
 
   _i2.Merchant? merchant;
 
-  int rankId;
+  String rank;
 
-  _i2.Rank? rank;
+  int points;
+
+  String? verticalCardImage;
+
+  String? horizontalCardImage;
 
   DateTime createdAt;
 
   DateTime updatedAt;
 
-  UserMerchantRank copyWith({
+  Rank copyWith({
     int? id,
-    int? userId,
-    _i2.User? user,
     int? merchantId,
     _i2.Merchant? merchant,
-    int? rankId,
-    _i2.Rank? rank,
+    String? rank,
+    int? points,
+    String? verticalCardImage,
+    String? horizontalCardImage,
     DateTime? createdAt,
     DateTime? updatedAt,
   });
@@ -99,12 +93,13 @@ abstract class UserMerchantRank implements _i1.SerializableModel {
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
-      'userId': userId,
-      if (user != null) 'user': user?.toJson(),
       'merchantId': merchantId,
       if (merchant != null) 'merchant': merchant?.toJson(),
-      'rankId': rankId,
-      if (rank != null) 'rank': rank?.toJson(),
+      'rank': rank,
+      'points': points,
+      if (verticalCardImage != null) 'verticalCardImage': verticalCardImage,
+      if (horizontalCardImage != null)
+        'horizontalCardImage': horizontalCardImage,
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
     };
@@ -118,50 +113,54 @@ abstract class UserMerchantRank implements _i1.SerializableModel {
 
 class _Undefined {}
 
-class _UserMerchantRankImpl extends UserMerchantRank {
-  _UserMerchantRankImpl({
+class _RankImpl extends Rank {
+  _RankImpl({
     int? id,
-    required int userId,
-    _i2.User? user,
     required int merchantId,
     _i2.Merchant? merchant,
-    required int rankId,
-    _i2.Rank? rank,
+    required String rank,
+    required int points,
+    String? verticalCardImage,
+    String? horizontalCardImage,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) : super._(
           id: id,
-          userId: userId,
-          user: user,
           merchantId: merchantId,
           merchant: merchant,
-          rankId: rankId,
           rank: rank,
+          points: points,
+          verticalCardImage: verticalCardImage,
+          horizontalCardImage: horizontalCardImage,
           createdAt: createdAt,
           updatedAt: updatedAt,
         );
 
   @override
-  UserMerchantRank copyWith({
+  Rank copyWith({
     Object? id = _Undefined,
-    int? userId,
-    Object? user = _Undefined,
     int? merchantId,
     Object? merchant = _Undefined,
-    int? rankId,
-    Object? rank = _Undefined,
+    String? rank,
+    int? points,
+    Object? verticalCardImage = _Undefined,
+    Object? horizontalCardImage = _Undefined,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
-    return UserMerchantRank(
+    return Rank(
       id: id is int? ? id : this.id,
-      userId: userId ?? this.userId,
-      user: user is _i2.User? ? user : this.user?.copyWith(),
       merchantId: merchantId ?? this.merchantId,
       merchant:
           merchant is _i2.Merchant? ? merchant : this.merchant?.copyWith(),
-      rankId: rankId ?? this.rankId,
-      rank: rank is _i2.Rank? ? rank : this.rank?.copyWith(),
+      rank: rank ?? this.rank,
+      points: points ?? this.points,
+      verticalCardImage: verticalCardImage is String?
+          ? verticalCardImage
+          : this.verticalCardImage,
+      horizontalCardImage: horizontalCardImage is String?
+          ? horizontalCardImage
+          : this.horizontalCardImage,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );
