@@ -227,11 +227,11 @@ class EndpointStamp extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<int> getTotalStampByMerchant({
+  _i2.Future<List<int>> getTotalStampByMerchant({
     required int merchantId,
     required int userId,
   }) =>
-      caller.callServerEndpoint<int>(
+      caller.callServerEndpoint<List<int>>(
         'stamp',
         'getTotalStampByMerchant',
         {

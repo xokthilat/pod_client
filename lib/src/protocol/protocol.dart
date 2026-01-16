@@ -171,6 +171,9 @@ class Protocol extends _i1.SerializationManager {
       return (data as List).map((e) => deserialize<_i18.Stamp>(e)).toList()
           as dynamic;
     }
+    if (t == List<int>) {
+      return (data as List).map((e) => deserialize<int>(e)).toList() as dynamic;
+    }
     if (t == List<_i19.User>) {
       return (data as List).map((e) => deserialize<_i19.User>(e)).toList()
           as dynamic;
