@@ -227,6 +227,19 @@ class EndpointStamp extends _i1.EndpointRef {
         },
       );
 
+  _i2.Future<int> getTotalStampByMerchant({
+    required int merchantId,
+    required int userId,
+  }) =>
+      caller.callServerEndpoint<int>(
+        'stamp',
+        'getTotalStampByMerchant',
+        {
+          'merchantId': merchantId,
+          'userId': userId,
+        },
+      );
+
   _i2.Future<List<_i8.Stamp>> getMyUnredeemStamp({
     required int userId,
     required int campaignId,
