@@ -118,6 +118,13 @@ class EndpointReward extends _i1.EndpointRef {
         {'campaignId': campaignId},
       );
 
+  _i2.Future<List<_i5.Reward>> getRewardByRank({required int rankId}) =>
+      caller.callServerEndpoint<List<_i5.Reward>>(
+        'reward',
+        'getRewardByRank',
+        {'rankId': rankId},
+      );
+
   _i2.Future<List<_i5.Reward>> getReward({
     required int cardId,
     required int userId,

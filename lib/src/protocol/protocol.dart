@@ -144,6 +144,11 @@ class Protocol extends _i1.SerializationManager {
           ? (data as List).map((e) => deserialize<_i14.Reward>(e)).toList()
           : null) as dynamic;
     }
+    if (t == _i1.getType<List<_i14.Reward>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i14.Reward>(e)).toList()
+          : null) as dynamic;
+    }
     if (t == _i1.getType<List<_i14.Stamp>?>()) {
       return (data != null
           ? (data as List).map((e) => deserialize<_i14.Stamp>(e)).toList()

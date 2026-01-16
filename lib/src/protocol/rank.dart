@@ -20,6 +20,7 @@ abstract class Rank implements _i1.SerializableModel {
     required this.rank,
     required this.points,
     this.verticalCardImage,
+    this.rewards,
     this.horizontalCardImage,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -33,6 +34,7 @@ abstract class Rank implements _i1.SerializableModel {
     required String rank,
     required int points,
     String? verticalCardImage,
+    List<_i2.Reward>? rewards,
     String? horizontalCardImage,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -49,6 +51,9 @@ abstract class Rank implements _i1.SerializableModel {
       rank: jsonSerialization['rank'] as String,
       points: jsonSerialization['points'] as int,
       verticalCardImage: jsonSerialization['verticalCardImage'] as String?,
+      rewards: (jsonSerialization['rewards'] as List?)
+          ?.map((e) => _i2.Reward.fromJson((e as Map<String, dynamic>)))
+          .toList(),
       horizontalCardImage: jsonSerialization['horizontalCardImage'] as String?,
       createdAt:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
@@ -72,6 +77,8 @@ abstract class Rank implements _i1.SerializableModel {
 
   String? verticalCardImage;
 
+  List<_i2.Reward>? rewards;
+
   String? horizontalCardImage;
 
   DateTime createdAt;
@@ -85,6 +92,7 @@ abstract class Rank implements _i1.SerializableModel {
     String? rank,
     int? points,
     String? verticalCardImage,
+    List<_i2.Reward>? rewards,
     String? horizontalCardImage,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -98,6 +106,8 @@ abstract class Rank implements _i1.SerializableModel {
       'rank': rank,
       'points': points,
       if (verticalCardImage != null) 'verticalCardImage': verticalCardImage,
+      if (rewards != null)
+        'rewards': rewards?.toJson(valueToJson: (v) => v.toJson()),
       if (horizontalCardImage != null)
         'horizontalCardImage': horizontalCardImage,
       'createdAt': createdAt.toJson(),
@@ -121,6 +131,7 @@ class _RankImpl extends Rank {
     required String rank,
     required int points,
     String? verticalCardImage,
+    List<_i2.Reward>? rewards,
     String? horizontalCardImage,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -131,6 +142,7 @@ class _RankImpl extends Rank {
           rank: rank,
           points: points,
           verticalCardImage: verticalCardImage,
+          rewards: rewards,
           horizontalCardImage: horizontalCardImage,
           createdAt: createdAt,
           updatedAt: updatedAt,
@@ -144,6 +156,7 @@ class _RankImpl extends Rank {
     String? rank,
     int? points,
     Object? verticalCardImage = _Undefined,
+    Object? rewards = _Undefined,
     Object? horizontalCardImage = _Undefined,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -158,6 +171,9 @@ class _RankImpl extends Rank {
       verticalCardImage: verticalCardImage is String?
           ? verticalCardImage
           : this.verticalCardImage,
+      rewards: rewards is List<_i2.Reward>?
+          ? rewards
+          : this.rewards?.map((e0) => e0.copyWith()).toList(),
       horizontalCardImage: horizontalCardImage is String?
           ? horizontalCardImage
           : this.horizontalCardImage,
